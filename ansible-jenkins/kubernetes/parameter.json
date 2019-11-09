@@ -1,0 +1,15 @@
+[
+    {
+        "ParameterKey": "EnvironmentName",
+        "ParameterValue": "oceaneksproject"
+    },
+    
+    {
+        "ParameterKey": "sshKey",
+        "ParameterValue": "sagar_aws"
+    },
+    {
+        "ParameterKey":"DesiredInstances",
+        "ParameterValue": "4"
+    }
+]

@@ -1,0 +1,18 @@
+---
+- hosts: launched
+  connection: local
+  tasks:
+    - name: Terminate aws instance
+      local_action:
+            module: ec2_term
+            aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+            aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+            state: 'absent'
+            instance_ids: "{{ hostvars[groups['launched'][0]]['instance_id'] }}"
+            wait: True
+  tags:
+        - terminateInstance
+- name: Wait for the instances to be stopped by checking the ssh port
+    wait_for: host="{{ hostvars[groups['launched'][0]]['inventory_hostname'] }}" port=22 delay=60 timeout=320 state=stopped
+    tags:
+        - terminateInstance

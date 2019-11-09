@@ -1,0 +1,46 @@
+---
+# tasks file for jenkins
+- name: Install Java 8 using YUM.
+  yum:
+    name: "{{java.VERSION}}"
+    state: latest  
+  become: true
+
+#- name: Correct the alternatives to change default Java version.
+#  alternatives:
+#    name: java
+#    link: /bin/java
+#    path: "{{java.ALTERNATIVES}}"
+
+- name: Download Jenkins repo yum URL for  
+  get_url:
+    url: "{{jenkins.repo_URL}}"
+    dest: /etc/yum.repos.d/jenkins.repo
+  become: true
+  become_user: root
+
+#- name: Import GPG Key
+#  rpm_key:
+#    state: present
+#    key: "{{jenkins.gpg_key}}"
+
+- name: Install Jenkins
+  yum:
+    name: jenkins
+    state: present
+  become: true
+  become_user: root
+- name: Change Jenkins JAVA options
+  lineinfile: 
+    dest=/etc/sysconfig/jenkins
+    regexp=^JENKINS_JAVA_OPTIONS=
+    line=JENKINS_JAVA_OPTIONS="{{ jenkins.JAVA_OPTIONS }}"
+  become: true
+
+- name: Start Jenkins service and enable on boot
+  service:
+    name: jenkins
+    state: started
+    enabled: yes
+  become: true
+  become_user: root
