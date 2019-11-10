@@ -1,0 +1,44 @@
+Description: >
+    Author - Sagar Bhattarai
+    Creating the Amazon EKS Cluster
+Parameters:
+  VPCStack:
+    Description: VPC stack name
+    Type: String
+Resources:
+ ClusterRole:
+    Description: Allows EKS to manage clusters on your behalf.
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+            Effect: Allow
+            Principal:
+              Service:
+                - eks.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+        - arn:aws:iam::aws:policy/AmazonEKSServicePolicy
+ 
+ EKSCluster:
+    Type: AWS::EKS::Cluster
+    Properties:
+      Version: '1.14'
+      RoleArn: !GetAtt ClusterRole.Arn
+      ResourcesVpcConfig:
+        SecurityGroupIds:
+        - Fn::ImportValue:
+            !Sub "${VPCStack}-SCG"
+        SubnetIds:
+            Fn::Split:
+                - ","
+                - Fn::ImportValue:
+                      Fn::Sub: ${VPCStack}-SubnetIDs
+Outputs:
+  EksId:
+    Description: The EKS id.
+    Value: !Ref EKSCluster
+    Export: 
+        Name: !Sub ${AWS::StackName}-EKS

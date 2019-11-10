@@ -1,0 +1,21 @@
+[
+       {
+        "ParameterKey": "KeyName",
+        "ParameterValue": "ocean_aws"
+       },
+       
+       {
+        "ParameterKey": "VPCStack",
+        "ParameterValue": "vpc8"
+       },
+      
+       {
+        "ParameterKey": "ClusterStack",
+        "ParameterValue": "cluster6"
+       },
+
+       {
+        "ParameterKey": "DesiredInstances",
+        "ParameterValue": "3"
+       }
+]
