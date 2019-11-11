@@ -6,12 +6,12 @@
        
        {
         "ParameterKey": "VPCStack",
-        "ParameterValue": "vpc8"
+        "ParameterValue": "vpc"
        },
       
        {
         "ParameterKey": "ClusterStack",
-        "ParameterValue": "cluster6"
+        "ParameterValue": "cluster"
        },
 
        {

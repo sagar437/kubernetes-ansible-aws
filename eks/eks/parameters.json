@@ -1,6 +1,6 @@
 [
     {
         "ParameterKey": "VPCStack",
-        "ParameterValue": "vpc8"
+        "ParameterValue": "vpc"
     }
 ]
