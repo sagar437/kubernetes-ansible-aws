@@ -55,9 +55,9 @@ Resources:
       DefaultActions:
         -   Type: forward
       TargetGroupArn:
-        Ref: FlaskappTargetGroup
+        - !Ref 'FlaskappTargetGroup'
       LoadBalancerArn:
-        Ref: FlaskappLB
+        - !Ref 'FlaskappLB'
       Port: 80
       Protocol: HTTP
 
@@ -65,12 +65,12 @@ Resources:
     Type: AWS::ElasticLoadBalancingV2::ListenerRule
     Properties:
       Actions:
-        -   Type: forward
-            TargetGroupArn: !Ref 'FlaskappTargetGroup'
+        - Type: forward
+          TargetGroupArn: !Ref FlaskappTargetGroup
       Conditions:
-        -   Field: path-pattern
-            Values: [/]
-      ListenerArn: !Ref 'Listener'
+        - Field: path-pattern
+          Values: [/]
+      ListenerArn: !Ref Listener
       Priority: 1
 
 Outputs:
