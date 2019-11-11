@@ -280,3 +280,15 @@ Outputs:
     Value: !Ref VPC
     Export:
         Name: !Sub ${AWS::StackName}-VPCID
+
+  PublicSubnet01:
+   Description: Public subnet 1
+   Value: !Ref PublicSubnet01
+   Export:
+      Name: !Sub ${AWS::StackName}-PublicSubnet01
+
+  PublicSubnet02:
+   Description: Public subnet 2
+   Value: !Ref PublicSubnet02
+   Export:
+      Name: !Sub ${AWS::StackName}-PublicSubnet02

@@ -1,0 +1,81 @@
+Description: >
+    LoadBalancer
+    Author - Sagar Bhattarai
+Parameters:
+  VPCStack:
+     Description: VPC stack name
+     Type: String
+
+Resources:
+  LBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Http traffic to LB
+      VpcId:
+        Fn::ImportValue: !Sub "${VPCStack}-VPCID"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  FlaskappTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckIntervalSeconds: 10
+      HealthCheckPath: /
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 8
+      HealthyThresholdCount: 2
+      Port: 80
+      Protocol: HTTP
+      UnhealthyThresholdCount: 5
+      VpcId:
+        Fn::ImportValue: !Sub "${VPCStack}-VPCID"
+
+
+  FlaskappLB:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      SecurityGroups:
+        - !Ref LBSecurityGroup
+      Subnets:
+        - Fn::ImportValue:
+            !Sub "${VPCStack}-PublicSubnet01"
+        - Fn::ImportValue:
+            !Sub "${VPCStack}-PublicSubnet02"
+  Listener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        -   Type: forward
+      TargetGroupArn:
+        Ref: FlaskappTargetGroup
+      LoadBalancerArn:
+        Ref: FlaskappLB
+      Port: 80
+      Protocol: HTTP
+
+  LBListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      Actions:
+        -   Type: forward
+            TargetGroupArn: !Ref 'FlaskappTargetGroup'
+      Conditions:
+        -   Field: path-pattern
+            Values: [/]
+      ListenerArn: !Ref 'Listener'
+      Priority: 1
+
+Outputs:
+  FlaskAppLoadBalancerDNSName:
+      Description: URL of the Load Balancer
+      Value: !Join [ "", [ 'http://', !GetAtt FlaskappLB.DNSName ]]
+      Export:
+        Name: !Sub ${AWS::StackName}-LB-DNSName
