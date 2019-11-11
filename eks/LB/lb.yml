@@ -38,7 +38,6 @@ Resources:
       VpcId:
         Fn::ImportValue: !Sub "${VPCStack}-VPCID"
 
-
   FlaskappLB:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
@@ -53,11 +52,11 @@ Resources:
     Type: AWS::ElasticLoadBalancingV2::Listener
     Properties:
       DefaultActions:
-        -   Type: forward
+        - Type: forward
       TargetGroupArn:
-        - !Ref 'FlaskappTargetGroup'
+        - !Ref FlaskappTargetGroup
       LoadBalancerArn:
-        - !Ref 'FlaskappLB'
+        - !Ref FlaskappLB
       Port: 80
       Protocol: HTTP
 
