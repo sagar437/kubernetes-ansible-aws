@@ -16,7 +16,7 @@ node {
     }
     stage('Build Docker image') {
 	    echo 'Building Docker image.'
-		sh "docker login
+		sh "cat ~/docker_password.txt | docker login --username sagar437 --password-stdin"
 	     	sh "docker build -t ${registry} Docker/."
 	     	sh "docker tag ${registry} ${registry}"
 	     	sh "docker push ${registry}"
