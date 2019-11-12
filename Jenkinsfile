@@ -12,7 +12,7 @@ node {
     }
     stage("Linting") {
       echo 'Linting...'
-      sh 'docker run --rm -i hadolint/hadolint < Docker/Dockerfile'
+      sh 'sudo Docker run --rm -i hadolint/hadolint < Docker/Dockerfile'
     }
     stage('Build Docker image') {
 	    echo 'Building Docker image.'
@@ -29,7 +29,7 @@ node {
         withAWS(credentials: 'aws-jenkins', region: 'us-west-2') {
             sh "aws eks --region us-west-2 update-kubeconfig --name EKSCluster-UWR9ZWz9MbUw"
             sh "kubectl apply -f eks/aws-auth-cm.yaml"
-            sh "kubectl set image deploy/flask-app flask-app=${registry}:latest"
+            sh "kubectl set image deployments/flask-app flask-app=${registry}:latest"
             sh "kubectl apply -f deploy.yml"
             sh "kubectl get nodes"
             sh "kubectl get pods"

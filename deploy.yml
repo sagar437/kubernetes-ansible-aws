@@ -21,7 +21,7 @@ spec:
         app: flask-app
     spec:
       containers:
-      - image: sagar437/flask_app:latest
+      - image: sagar437/flask_app:sagar_flask_app
         imagePullPolicy: Always
         name: flask-app
         ports:
