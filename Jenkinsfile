@@ -12,7 +12,7 @@ node {
     }
     stage("Linting") {
       echo 'Linting...'
-      sh 'sudo Docker run --rm -i hadolint/hadolint < Docker/Dockerfile'
+      sh 'sudo docker run --rm -i hadolint/hadolint < Docker/Dockerfile'
     }
     stage('Build Docker image') {
 	    echo 'Building Docker image.'
