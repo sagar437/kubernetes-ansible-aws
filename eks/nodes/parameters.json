@@ -1,21 +1,46 @@
 [
        {
-        "ParameterKey": "KeyName",
-        "ParameterValue": "ocean_aws"
+        "ParameterKey": "ClusterControlPlaneSecurityGroup",
+        "ParameterValue": "sg-0d35489eada306190"
        },
        
        {
-        "ParameterKey": "VPCStack",
-        "ParameterValue": "vpc"
+        "ParameterKey": "NodeGroupName",
+        "ParameterValue": "oceannodes"
        },
       
        {
-        "ParameterKey": "ClusterStack",
-        "ParameterValue": "cluster"
+        "ParameterKey": "ClusterName",
+        "ParameterValue": "EKSCluster-UWR9ZWz9MbUw"
+       },
+ 
+       {
+        "ParameterKey": "KeyName",
+        "ParameterValue": "ocean_aws"
        },
 
        {
-        "ParameterKey": "DesiredInstances",
+        "ParameterKey": "Subnets",
+        "ParameterValue": "subnet-0871b5880ddad16ce,subnet-06ba07234eb748a25,subnet-0e5c6df720e22f1a5,subnet-09b65f72438ec54ad"
+       },
+       
+       {
+        "ParameterKey": "VpcId",
+        "ParameterValue": "vpc-0ff831c3f37c7452e"
+       },
+      
+       {
+        "ParameterKey": "NodeAutoScalingGroupMaxSize",
+        "ParameterValue": "4"
+       },
+
+      {
+        "ParameterKey": "NodeAutoScalingGroupMinSize",
+        "ParameterValue": "1"
+       },
+
+       {
+        "ParameterKey": "NodeAutoScalingGroupDesiredCapacity",
         "ParameterValue": "3"
        }
 ]
