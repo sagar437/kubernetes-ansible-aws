@@ -39,6 +39,7 @@ Resources:
         - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
         - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
         - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
   NodesSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -148,9 +149,9 @@ Outputs:
     Description: The node instance role
     Value: !GetAtt InstanceRole.Arn
     Export: 
-      Name: !Sub ${AWS::StackName}-IR
+      Name: !Sub ${AWS::StackName}-InstanceRole
   NodesSecurityGroup:
     Description: The security group for the nodes.
     Value: !Ref NodesSecurityGroup
     Export:
-      Name: !Sub ${AWS::StackName}-NSG
+      Name: !Sub ${AWS::StackName}-NodeSecurityGroup
