@@ -9,6 +9,8 @@ node {
       sh 'git --version'
       echo "Branch: ${env.BRANCH_NAME}"
       sh 'docker -v'
+      sh 'aws --version'
+      sh 'kubectl version'
     }
     stage("Linting") {
       echo 'Linting...'
@@ -36,8 +38,8 @@ node {
         }
       }
     }
-    stage("Cleaning up") {
-      echo 'Cleaning up...'
-      sh "docker system prune"
+    stage("Clean up docker") {
+      echo 'Cleaning up docker images'
+      sh "docker system prune -f"
     }
 }
