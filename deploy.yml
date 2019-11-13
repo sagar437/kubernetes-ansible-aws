@@ -21,10 +21,10 @@ spec:
         app: flask-app
     spec:
       containers:
-      - image: sagar437/flask_app:sagar_flask_app
+              - image: sagar437/kubernetes-ansible-aws:latest
         imagePullPolicy: Always
         name: flask-app
         ports:
-        - containerPort: 3000
+        - containerPort: 8000
           protocol: TCP
 
