@@ -4,27 +4,19 @@ metadata:
   name: flask-app
   labels:
     app: flask-app
-  namespace: default
 spec:
   replicas: 3
   selector:
     matchLabels:
       app: flask-app
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
       labels:
         app: flask-app
     spec:
       containers:
-              - image: sagar437/kubernetes-ansible-aws:latest
-        imagePullPolicy: Always
-        name: flask-app
+      - name: flask-app
+        image: sagar437/kubernetes-ansible-aws:latest
         ports:
         - containerPort: 8000
-          protocol: TCP
-
+          name: flask-app
