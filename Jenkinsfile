@@ -31,7 +31,6 @@ node {
             sh "sudo kubectl apply -f deploy.yml"
             sh "sudo kubectl get nodes"
             sh "sudo kubectl get pods"
-            sh "aws cloudformation update-stack --stack-name nodes --template-body file://eks/nodes/nodes.yml --parameters file://eks/nodes/parameters.json --capabilities CAPABILITY_IAM"
         }
       }
     }
