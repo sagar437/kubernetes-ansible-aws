@@ -29,8 +29,10 @@ node {
             sh "sudo kubectl apply -f eks/aws-auth-cm.yaml"
             sh "sudo kubectl set image deployments/flask-app flask-app=${registry}:latest"
             sh "sudo kubectl apply -f deploy.yml"
+            sh "sudo kubectl apply -f flask-service.yml"
             sh "sudo kubectl get nodes"
             sh "sudo kubectl get pods"
+            sh "sudo kubectl get services -o wide"
         }
       }
     }
