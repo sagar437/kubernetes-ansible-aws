@@ -27,10 +27,10 @@ node {
         withAWS(credentials: 'aws-jenkins', region: 'us-west-2') {
             sh "aws eks --region us-west-2 update-kubeconfig --name EKSCluster-UWR9ZWz9MbUw"
             sh "sudo kubectl apply -f eks/aws-auth-cm.yaml"
-            sh "kubectl set image deployments/flask-app flask-app=${registry}:latest"
-            sh "kubectl apply -f deploy.yml"
-            sh "kubectl get nodes"
-            sh "kubectl get pods"
+            sh "sudo kubectl set image deployments/flask-app flask-app=${registry}:latest"
+            sh "sudo kubectl apply -f deploy.yml"
+            sh "sudo kubectl get nodes"
+            sh "sudo kubectl get pods"
             sh "aws cloudformation update-stack --stack-name nodes --template-body file://eks/nodes/nodes.yml --parameters file://aws/nodes/parameters.json --capabilities CAPABILITY_IAM"
         }
       }
