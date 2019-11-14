@@ -426,6 +426,17 @@ Resources:
       SourceSecurityGroupId: !Ref ClusterControlPlaneSecurityGroup
       ToPort: 443
 
+  NodeSecurityGroupFromControlPlaneOn8000Ingress:
+    Type: "AWS::EC2::SecurityGroupIngress"
+    DependsOn: NodeSecurityGroup
+    Properties:
+      Description: Allow pods to receive communication from LBon port 8000
+      FromPort: 8000
+      GroupId: !Ref NodeSecurityGroup
+      IpProtocol: tcp
+      SourceSecurityGroupId: !Ref ClusterControlPlaneSecurityGroup
+      ToPort: 8000
+
   NodeLaunchConfig:
     Type: "AWS::AutoScaling::LaunchConfiguration"
     Properties:
