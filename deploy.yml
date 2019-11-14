@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: sagar437/kubernetes-ansible-aws:latest
+        image: sagar437/kubernetes-ansible-aws:latest_new
         ports:
         - containerPort: 8000
           name: flask-app
