@@ -3,15 +3,23 @@ This is a project for Udacity Devops Engineering program.
 The project runs a Flask App using Gunicorn. App is deployed as a docker container to the kubernetes Cluster. Deployment is done through Jenkins.
 
 eks: folder contains cloudformation scripts to deploy a kubernetes cluster. Within EKS folder there are 3 folders.
+
 eks/VPC: This folder contains cloud formation script to deploy the VPC,private and public subnets.
+
 eks/EKS: This folder contains cloudformation script to deploy the Amazon EKS cluster.
+
 eks/nodes: This folder contains cloudformation script to deploy the worker nodes with appropriate security groups
+
 eks/aws-auth-cm.yaml: This file contains rolearn that connected worker nodes to out cluster.
 
 Docker folder contains the docker file and a flask app scripts and it's template
+
 Docker/Dockerfile: Docker file
+
 Docker/server.py: Script running the flask app.
+
 Docker/requirement.txt: Requirement packages to get our app running successfully
+
 Docker/templates: This folder has index.html that is referenced in server.py file
 
 deploy.yml: This file applies our flask app to our kubernetes cluster.
