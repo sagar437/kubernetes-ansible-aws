@@ -25,7 +25,7 @@ Docker/requirement.txt: Requirement packages to get our app running successfully
 Docker/templates: This folder has index.html that is referenced in server.py file
 
 
-deploy.yml: This file applies our flask app to our kubernetes cluster.
+deploy.yml: This file applies our flask app to our kubernetes cluster using a rolling update.
 
 
 flask-service.yml: This file creates an classic load balancer for our cluster.
