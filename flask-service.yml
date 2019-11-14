@@ -7,7 +7,7 @@ spec:
     app: flask-app
   ports:
   - port: 80
-    targetport: 80
+    targetPort: 8000
     protocol: TCP
   type: LoadBalancer
 
