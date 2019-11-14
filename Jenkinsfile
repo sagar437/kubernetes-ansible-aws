@@ -20,8 +20,8 @@ node {
 	    echo 'Building Docker image.'
 		sh "cat ~/docker_password.txt | docker login --username sagar437 --password-stdin"
 	     	sh "docker build -t ${registry} Docker/."
-	     	sh "docker tag ${registry} ${registry}"
-	     	sh "docker push ${registry} -t latest_new"
+	     	sh "docker tag ${registry} ${registry}:latest_new"
+	     	sh "docker push ${registry}"
     }
     stage('Deploying') {
       echo 'Deploying to AWS...'
